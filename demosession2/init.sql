@@ -19,4 +19,3 @@ CREATE TABLE IF NOT EXISTS answers (
 	houserent varchar(50),
 	healthcare varchar(50)
 );
-
