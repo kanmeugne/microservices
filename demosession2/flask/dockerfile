@@ -1,0 +1,11 @@
+FROM python:3.7
+
+COPY ./requirements.txt /src/requirements.txt
+
+RUN apt-get install default-libmysqlclient-dev
+
+RUN pip install -r /src/requirements.txt
+
+EXPOSE 5000
+
+ENTRYPOINT ["python", "/src/app.py"]
