@@ -15,11 +15,16 @@ services:
     volumes:
       - ./data/:/var/lib/mysql
     
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-    - 8080:8080
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      container_name: phpmyadmin
+      environment:
+      - PMA_HOST:'db'
+      restart: always
+      ports:
+      - 8080:80
+      volumes:
+      - /sessions
 
   survey:
     build: php
