@@ -13,9 +13,12 @@ if (!$con)
 
 mysqli_select_db($con, $db_database);
 ?>
-
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
 <body style="font-size:100%;font-family:cambria;">
-
+<div class="container">
 <h1 style="font-family:courier;font-size:300%;"> Welcome to my survey </h1>
 
 <p> The purpose of this survey is to improve financial transactions.</p>
@@ -184,94 +187,103 @@ else
 	echo "<span style=\"color:red;\"> <b>Please fill the required fields (with *) and press the submit button!</b></span>";
 }
 ?>
- <form method="post" action="./survey.php">
-	<table>
-	  <tr>
-		<td>First Name:</td>
-		<td>
-		  <input type="text" name="firstname"><span class="error" style="color:red;"><?php echo $firstnameErr;?></span>
-		</td>
-	  </tr>
-	  <tr>
-		<td>Last Name:</td>
-		<td>
-		  <input type="text" name="lastname"><span class="error" style="color:red;"><?php echo $lastnameErr;?></span>
-		</td>
-	  </tr>
-	  <tr>
-		<td>Gender:</td>
-		<td>
-		  <input type="radio" name="gender" value="female">Female
-		  <input type="radio" name="gender" value="male">Male
-		  <input type="radio" name="gender" value="other">Other
+	<div class="row">
+ <form method="post" action="./index.php" class="col s12">
+	<div class="row">
+		<div class="input-field col s6">
+		  <input type="text" class="validate" id="firstname" name="firstname"><span class="error" style="color:red;"><?php echo $firstnameErr;?></span>
+			<label for="firstname">First Name</label>
+		</div>
+		<div class="input-field col s6">
+		  <input type="text" class="validate" id="lastname" name="lastname"><span class="error" style="color:red;"><?php echo $lastnameErr;?></span>
+			<label for="lastname">Last Name</label>
+		</div>
+	</div>
+	<div class="col s12">
+		<label>
+		  <input type="radio" name="gender" value="female"><span>Female</span>
+		</label>
+		<label>
+		  <input type="radio" name="gender" value="male"><span>Male</span>
+			</label>
+			<label>
+		  <input type="radio" name="gender" value="other"><span>Other</span>
+			</label>
 		  <span class="error" style="color:red;"><?php echo $genderErr;?></span>
-		</td>
-	  </tr>
-	  <tr>
-		<td>Birth Place (Country):</td>
-		<td>
-		  <input type="text" name="birthplace"><span class="error" style="color:red;"><?php echo $birthplaceErr;?></span>
-		</td>
-	  </tr>
-	  <tr>
-		<td>Birth Year:</td>
-		<td>
-		  <input type="integer" name="birthyear"><span class="error" style="color:red;"><?php echo $birthyearErr;?></span>
-		</td>
-	  </tr>
-	  <tr>
-		<td>Nationality:</td>
-		<td>
-		  <input type="text" name="nationality"><span class="error" style="color:red;"><?php echo $nationalityErr;?></span>
-		</td>
-	  </tr>
-	  <tr>
-		<td>Email:</td>
-		<td>
-		  <input type="text" name="email"><span class="error" style="color:red;"><?php echo $emailErr;?></span>
-		</td>
-	  </tr>
-	  <tr>
-		<th colspan="2" > Favorite paiement mode for </th>
-	  </tr>
-	  <tr>
-		<td>Transport:</td>
-		<td>
-			<input type="radio" name="transport" value="check">Check
-			<input type="radio" name="transport" value="cb">Credit Card
-			<input type="radio" name="transport" value="bank_transfer">Bank Transfer
-			<input type="radio" name="transport" value="cash">Cash
+	</div>
+	<div class="input-field col s6">
+		  <input type="text" class="datepicker" id="birthplace" name="birthplace" placeholder="Birthday"><span class="error" style="color:red;"><?php echo $birthplaceErr;?></span>
+	</div>
+	<div class="input-field col s6">
+		  <input type="number" class="validate" id="birthyear" name="birthyear"><span class="error" style="color:red;"><?php echo $birthyearErr;?></span>
+			<label for="birthyear">Birthyear</label>
+	</div>
+	<div class="input-field col s6">
+		  <input type="text" class="validate" name="nationality"><span class="error" style="color:red;"><?php echo $nationalityErr;?></span>
+			<label for="nationality">Nationality</label>
+	</div>
+	<div class="input-field col s6">
+		  <input type="email" class="validate" name="email"><span class="error" style="color:red;"><?php echo $emailErr;?></span>
+			<label for="email">Email</label>
+	</div>
+	<div class="col s12">
+		<h5>Favorite payement method for</h5>
+	</div>
+	<div class="col s12">
+			<strong>Transport</strong>
+			<label><input type="radio" name="transport" value="check" class="with-gap"><span>Check</span></label>
+			<label><input type="radio" name="transport" value="cb" class="with-gap"><span>Credit Card</span></label>
+			<label><input type="radio" name="transport" value="bank_transfer" class="with-gap"><span>Bank Transfer</span></label>
+			<label><input type="radio" name="transport" value="cash" class="with-gap"><span>Cash</span></label>
 			<span class="error" style="color:red;"><?php echo $transportErr;?></span>
-		</td>
-	  </tr>
-	  <tr>
-		<td>Food:</td>
-		<td>
-			<input type="radio" name="food" value="check">Check
-			<input type="radio" name="food" value="cb">Credit Card
-			<input type="radio" name="food" value="bank_transfer">Bank Transfer
-			<input type="radio" name="food" value="cash">Cash
+	</div>
+	<div class="col s12">
+			<strong>Food</strong>
+			<label><input type="radio" name="food" value="check" class="with-gap"><span>Check</span></label>
+			<label><input type="radio" name="food" value="cb" class="with-gap"><span>Credit Card</span></label>
+			<label><input type="radio" name="food" value="bank_transfer" class="with-gap"><span>Bank Transfer</span></label>
+			<label><input type="radio" name="food" value="cash" class="with-gap"><span>Cash</span></label>
 			<span class="error" style="color:red;"><?php echo $foodErr;?></span>
-		</td>
-	  </tr>
-	  <tr>
-		<td>Clothes:</td>
-		<td>
-			<input type="radio" name="clothes" value="check">Check
-			<input type="radio" name="clothes" value="cb">Credit Card
-			<input type="radio" name="clothes" value="bank_transfer">Bank Transfer
-			<input type="radio" name="clothes" value="cash">Cash
+	</div>
+	<div class="col s12">
+			<strong>Clothes</strong>
+			<label><input type="radio" name="clothes" value="check" class="with-gap"><span>Check</span></label>
+			<label><input type="radio" name="clothes" value="cb" class="with-gap"><span>Credit Card</span></label>
+			<label><input type="radio" name="clothes" value="bank_transfer" class="with-gap"><span>Bank Transfer</span></label>
+			<label><input type="radio" name="clothes" value="cash" class="with-gap"><span>Cash</span></label>
 			<span class="error" style="color:red;"><?php echo $clothesErr;?></span>
-		</td>
-	  </tr>
-	  <tr>
+	</div>
+	<div class="col s12">
+			<strong>Shoes</strong>
+			<label><input type="radio" name="shoes" value="check" class="with-gap"><span>Check</span></label>
+			<label><input type="radio" name="shoes" value="cb" class="with-gap"><span>Credit Card</span></label>
+			<label><input type="radio" name="shoes" value="bank_transfer" class="with-gap"><span>Bank Transfer</span></label>
+			<label><input type="radio" name="shoes" value="cash" class="with-gap"><span>Cash</span></label>
+			<span class="error" style="color:red;"><?php echo $shoesErr;?></span>
+	</div>
+	<div class="col s12">
+			<strong>Houserent</strong>
+			<label><input type="radio" name="houserent" value="check" class="with-gap"><span>Check</span></label>
+			<label><input type="radio" name="houserent" value="cb" class="with-gap"><span>Credit Card</span></label>
+			<label><input type="radio" name="houserent" value="bank_transfer" class="with-gap"><span>Bank Transfer</span></label>
+			<label><input type="radio" name="houserent" value="cash" class="with-gap"><span>Cash</span></label>
+			<span class="error" style="color:red;"><?php echo $houserentErr;?></span>
+	</div>
+	<div class="col s12">
+			<strong>Healthcare</strong>
+			<label><input type="radio" name="healthcare" value="check" class="with-gap"><span>Check</span></label>
+			<label><input type="radio" name="healthcare" value="cb" class="with-gap"><span>Credit Card</span></label>
+			<label><input type="radio" name="healthcare" value="bank_transfer" class="with-gap"><span>Bank Transfer</span></label>
+			<label><input type="radio" name="healthcare" value="cash" class="with-gap"><span>Cash</span></label>
+			<span class="error" style="color:red;"><?php echo $healthcareErr;?></span>
+	</div>
+	<!-- <table>
 		<td>Shoes:</td>
 		<td>			
 			<input type="radio" name="shoes" value="check">Check
 			<input type="radio" name="shoes" value="cb">Credit Card
 			<input type="radio" name="shoes" value="bank_transfer">Bank Transfer
 			<input type="radio" name="shoes" value="cash">Cash
-			<span class="error" style="color:red;"><?php echo $shoesErr;?></span>
 		</td>
 	  </tr>
 	  <tr>
@@ -281,7 +293,6 @@ else
 			<input type="radio" name="houserent" value="cb">Credit Card
 			<input type="radio" name="houserent" value="bank_transfer">Bank Transfer
 			<input type="radio" name="houserent" value="cash">Cash
-			<span class="error" style="color:red;"><?php echo $houserentErr;?></span>
 		</td>
 	  </tr>
 	  <tr>
@@ -291,13 +302,21 @@ else
 			<input type="radio" name="healthcare" value="cb">Credit Card
 			<input type="radio" name="healthcare" value="bank_transfer">Bank Transfer
 			<input type="radio" name="healthcare" value="cash">Cash
-			<span class="error" style="color:red;"><?php echo $healthcareErr;?></span>
 		</td>
 	  </tr>
-	</table>
-	
-	<input type="submit" name="submit" value="Submit">
+	</table> -->
+	<div class="col s12">
+	<button type="submit" name="submit" value="Submit" class="waves-effect waves-light btn">Save</button>
+	</div>
 
 </form>
+</div>
 
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.datepicker');
+    var instances = M.Datepicker.init(elems, {});
+  });
+</script>
 </body>
