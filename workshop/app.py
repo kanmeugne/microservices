@@ -23,7 +23,7 @@ def hello():
 <!DOCTYPE html>
 <html>
 <body>
-    <p> Saying <b>{}</b>({}) </p>
+    <p> Saying <b>{}</b> ({}) </p>
     <audio controls>
     <source src="http://127.0.0.1:5000/data/translate.mp3?{}" type="audio/mpeg">
     Your browser does not support the audio element.
