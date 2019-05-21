@@ -1,3 +1,5 @@
 demosession2/data/*
 workshop/__pycache__/*
 workshop/data/*.mp3
+*pyc
+.vs/*
