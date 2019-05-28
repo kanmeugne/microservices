@@ -76,7 +76,6 @@ def index():
 
 @app.route('/longtask', methods=['POST'])
 def longtask():
-    import pdb; pdb.set_trace();
     elementid = request.json['elementid']
     userid = request.json['userid']
     task = long_task.delay(elementid, userid, url_for('event', _external=True))
@@ -87,9 +86,9 @@ def longtask():
 def event():
     userid = request.json['userid']
     data = request.json
-    ns = app.clients.get(userid)
-    if ns and data:
-        ns.emit('celerystatus', data)
+    ns, sid = app.clients.get(userid)
+    if ns and sid and data:
+        socketio.emit('celerystatus', data, room=sid, namespace=ns)
         return 'ok'
     return 'error', 404
 
@@ -109,9 +108,10 @@ def disconnect_request():
 def events_connect():
     userid = str(uuid.uuid4())
     session['userid'] = userid
-    current_app.clients[userid] = request.namespace
+    current_app.clients[userid] = (request.namespace, request.sid)
     emit('userid', {'userid': userid})
     emit('status', {'status': 'Connected user', 'userid': userid})
+    print('Connected! sid=%s' % request.sid)
 
 
 @socketio.on('disconnect', namespace='/events')
@@ -121,6 +121,4 @@ def events_disconnect():
 
 
 if __name__ == '__main__':
-    #port = int(os.environ.get("PORT", 5000))
-    #app.run(host='0.0.0.0', port=port)
-    socketio.run(app)
+	socketio.run(app)
